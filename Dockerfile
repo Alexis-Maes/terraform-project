@@ -2,11 +2,12 @@ FROM python:3.12-slim
 
 RUN pip install uv
 
-COPY . /app
 WORKDIR /app
+
+COPY . .
 
 RUN uv sync --locked
 
 EXPOSE 8080
 
-CMD uv run main.py
+CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]

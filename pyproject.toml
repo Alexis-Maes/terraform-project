@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "terraform-app"
 version = "0.1.0"
@@ -6,5 +10,44 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.117.1",
+    "google-cloud-secret-manager>=2.24.0",
+    "load-dotenv>=0.1.0",
+    "mistralai>=1.9.10",
     "uvicorn>=0.37.0",
 ]
+
+[dependency-groups]
+dev = [
+    "docformatter>=1.7.5",
+    "pre-commit>=4.2.0",
+    "pyright>=1.1.400",
+    "ruff>=0.11.7",
+    "typos>=1.31.1",
+    "debugpy-run>=1.13",
+    "vulture>=2.14",
+]
+
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+preview = true
+
+[tool.ruff.lint]
+select = ["F", "W", "I", "B"]
+extend-select = ["ANN201", "ANN001"]
+
+[tool.mypy]
+mypy_path = "src"
+explicit_package_bases = true
+warn_return_any = false
+warn_unused_ignores = false
+
+[[tool.mypy.overrides]]
+module = "abraxas.*"
+ignore_errors = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+
