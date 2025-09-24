@@ -692,6 +692,7 @@ dependencies = [
     { name = "google-cloud-secret-manager" },
     { name = "load-dotenv" },
     { name = "mistralai" },
+    { name = "pydantic" },
     { name = "uvicorn" },
 ]
 
@@ -712,6 +713,7 @@ requires-dist = [
     { name = "google-cloud-secret-manager", specifier = ">=2.24.0" },
     { name = "load-dotenv", specifier = ">=0.1.0" },
     { name = "mistralai", specifier = ">=1.9.10" },
+    { name = "pydantic", specifier = ">=2.11.9" },
     { name = "uvicorn", specifier = ">=0.37.0" },
 ]
 

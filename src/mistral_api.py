@@ -1,3 +1,5 @@
+import os
+
 from google.cloud import secretmanager
 from mistralai import Mistral
 
@@ -11,16 +13,16 @@ def get_secret(secret_id: str, project_id: str = "terraform-beginning") -> str:
     return secret_value
 
 
-api_key = get_secret("mistral-api-key")
+try:
+    api_key = get_secret("mistral-api-key")
+except:
+    api_key = os.getenv("MISTRAL_API_KEY")
 
 client = Mistral(api_key=api_key)
 
-
 def completion(query: str) -> str:
+    print("apikey is None", api_key is None)
     chat_response = client.chat.complete(
-        model="mistral-small-latest",
-        messages=[
-            {"role": "user", "content": query}
-        ]
+        model="mistral-small-latest", messages=[{"role": "user", "content": query}]
     )
-    return 
+    return chat_response.choices[0].message.content
